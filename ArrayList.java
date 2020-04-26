@@ -224,24 +224,23 @@ public class ArrayList<T> implements List<T> {
         public int nextIndex() {
             // BEGIN (write your solution here)   nextIndex
             if(index == size()) return size();
-            index++;
-            return index;
+            lastIndex = index + 1;
+            return lastIndex;
             // END
         }
 
         @Override
         public boolean hasPrevious() {
             // BEGIN (write your solution here)   hasPrevious
-            if(index > 0) return true;
-            return false;
+            return index > 0;
             // END
         }
 
         @Override
         public T previous() {
             // BEGIN (write your solution here)   previous
-            if(!hasPrevious()) throw new NoSuchElementException();
-            lastIndex = index--;
+            if (!hasPrevious()) throw new NoSuchElementException();
+            lastIndex = (--index);// or lastIndex = previousIndex(); index--;
             return ArrayList.this.m[lastIndex];
             // END
         }
@@ -272,58 +271,18 @@ public class ArrayList<T> implements List<T> {
         public void set(final T element) {
             // BEGIN (write your solution here)  set
             if (lastIndex == LAST_IS_NOT_SET) throw new IllegalStateException();
-            ArrayList.this.set(index, element);
+            ArrayList.this.set((int)next(), element);
 
             // END
         }
 
         @Override
         public void remove() {
-            secretRemove();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void secretRemove() {
             if (lastIndex == LAST_IS_NOT_SET) throw new IllegalStateException();
             ArrayList.this.remove(lastIndex);
             index--;
             lastIndex = LAST_IS_NOT_SET;
         }
+
     }
 }
