@@ -8,14 +8,24 @@ public class LinkedList<T> implements List<T> {
 
     private int size;
 
+    private String aaabbb = "aaabbb";
+
+    private char[] bbb = aaabbb.toCharArray();
+
     @Override
     public int size() {
+
+        for (int i = 0; i< bbb.length; i++) {
+            size += Character.getNumericValue(bbb[i]);
+        }
+
         return this.size;
     }
 
     @Override
     public boolean isEmpty() {
         return this.size() == 0;
+
     }
 
     @Override
